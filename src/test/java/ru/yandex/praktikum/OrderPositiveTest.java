@@ -1,95 +1,57 @@
-apackage ru.yandex.practicum;
+package ru.yandex.praktikum;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-public class faqText {
+public class OrderPositiveTest extends BaseTest {
 
     @Test
-    public void checkTextOneInFAQ() {
-        ru.yandex.practicum.MainPage mainPage = new ru.yandex.practicum.MainPage(webDriver);
+    public void checkOrderUpButton() {
+        MainPage mainPage = new MainPage(getWebDriver());
+        mainPage.clickOrderUpButton();
+        OrderPage orderPage = new OrderPage(getWebDriver());
         mainPage.clickCookieButton();
-        mainPage.scrollToQuestion();
-        mainPage.clickQuestion(mainPage.question0);
-        String expected = "Сколько это стоит? И как оплатить?";
-        String actual = mainPage.getText(mainPage.question0);
-        Assert.assertEquals(expected, actual);
+        orderPage.inputName("Петр");
+        orderPage.inputSurname("Петров");
+        orderPage.inputAdress("Халтуринская улица, 20");
+        orderPage.inputUnderground("Бульвар Рокоссовского");
+        orderPage.clickUnderground(orderPage.getUdergroundRokossovskyBoulevard());
+        orderPage.inputPhone("87779998877");
+        orderPage.clickButtonFurther(); // Кнопка Далее
+        orderPage.insertDates("29.05.2023");
+        orderPage.clickEmptySpace();
+        orderPage.clickRentalPeriod();
+        orderPage.clickThreeDay(); // 3 дня
+        orderPage.clickBlackPearl(); // Черный жемчуг
+        orderPage.clickButtonOrderMiddle(); // Заказать
+        orderPage.clickYesButtonConfirmOrder(); // Кнопка ДА
+        boolean isDisplayed = orderPage.displayingButtonViewOrder();
+        Assert.assertTrue("Кнопка 'Посмотреть статус' не найдена", isDisplayed);
     }
 
     @Test
-    public void checkTextTwoInFAQ() {
-        ru.yandex.practicum.MainPage mainPage = new ru.yandex.practicum.MainPage(webDriver);
+    public void checkOrderMiddleButton() {
+        MainPage mainPage = new MainPage(getWebDriver());
         mainPage.clickCookieButton();
-        mainPage.scrollToQuestion();
-        mainPage.clickQuestion(mainPage.question1);
-        String expected = "Хочу сразу несколько самокатов! Так можно?";
-        String actual = mainPage.getText(mainPage.question1);
-        Assert.assertEquals(expected, actual);
+        mainPage.clickOrderMiddleButton();
+        OrderPage orderPage = new OrderPage(getWebDriver());
+        orderPage.inputName("Иван");
+        orderPage.inputSurname("Иванов");
+        orderPage.inputAdress("улица Амундсена, 12");
+        orderPage.inputUnderground("Свиблово");
+        orderPage.clickUnderground(orderPage.getUdergroundSviblovo());
+        orderPage.inputPhone("89997779977");
+        orderPage.clickButtonFurther();
+        orderPage.insertDates("29.05.2023");
+        orderPage.clickEmptySpace();
+        orderPage.clickRentalPeriod();
+        orderPage.clickTwoDay(); // 2 дня
+        orderPage.clickGrayHopelessness(); // Серая безысходность
+        orderPage.writeCommentСourier("Код домофона - 1111");
+        orderPage.clickButtonOrderMiddle(); // Заказать
+        orderPage.clickYesButtonConfirmOrder(); // Кнопка ДА
+        boolean isDisplayed = orderPage.displayingButtonViewOrder();
+        Assert.assertTrue("Кнопка 'Посмотреть статус' не найдена", isDisplayed);
     }
 
-    @Test
-    public void checkTextThreeInFAQ() {
-        ru.yandex.practicum.MainPage mainPage = new ru.yandex.practicum.MainPage(webDriver);
-        mainPage.clickCookieButton();
-        mainPage.scrollToQuestion();
-        mainPage.clickQuestion(mainPage.question2);
-        String expected = "Как рассчитывается время аренды?";
-        String actual = mainPage.getText(mainPage.question2);
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void checkTextFourInFAQ() {
-        ru.yandex.practicum.MainPage mainPage = new ru.yandex.practicum.MainPage(webDriver);
-        mainPage.clickCookieButton();
-        mainPage.scrollToQuestion();
-        mainPage.clickQuestion(mainPage.question3);
-        String expected = "Можно ли заказать самокат прямо на сегодня?";
-        String actual = mainPage.getText(mainPage.question3);
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void checkTextFiveInFAQ() {
-        ru.yandex.practicum.MainPage mainPage = new ru.yandex.practicum.MainPage(webDriver);
-        mainPage.clickCookieButton();
-        mainPage.scrollToQuestion();
-        mainPage.clickQuestion(mainPage.question4);
-        String expected = "Можно ли продлить заказ или вернуть самокат раньше?";
-        String actual = mainPage.getText(mainPage.question4);
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void checkTextSixInFAQ() {
-        ru.yandex.practicum.MainPage mainPage = new ru.yandex.practicum.MainPage(webDriver);
-        mainPage.clickCookieButton();
-        mainPage.scrollToQuestion();
-        mainPage.clickQuestion(mainPage.question5);
-        String expected = "Вы привозите зарядку вместе с самокатом?";
-        String actual = mainPage.getText(mainPage.question5);
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void checkTextSevenInFAQ() {
-        ru.yandex.practicum.MainPage mainPage = new ru.yandex.practicum.MainPage(webDriver);
-        mainPage.clickCookieButton();
-        mainPage.scrollToQuestion();
-        mainPage.clickQuestion(mainPage.question6);
-        String expected = "Можно ли отменить заказ?";
-        String actual = mainPage.getText(mainPage.question6);
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void checkTextEightInFAQ() {
-        ru.yandex.practicum.MainPage mainPage = new ru.yandex.practicum.MainPage(webDriver);
-        mainPage.clickCookieButton();
-        mainPage.scrollToQuestion();
-        mainPage.clickQuestion(mainPage.question7);
-        String expected = "Я жизу за МКАДом, привезёте?";
-        String actual = mainPage.getText(mainPage.question7);
-        Assert.assertEquals(expected, actual);
-    }
 }
